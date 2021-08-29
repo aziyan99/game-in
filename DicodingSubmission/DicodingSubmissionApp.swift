@@ -13,14 +13,10 @@ struct DicodingSubmissionApp: App {
     var body: some Scene {
         WindowGroup {
             TabView(selection: $selectedMenu) {
-                GenreView()
-                    .tabItem {
-                        Label("Genre", systemImage: (selectedMenu == 0) ? "flag.fill" : "flag")
-                    }.tag(0)
                 BrowseView()
                     .tabItem {
-                        Label("Browse", systemImage: (selectedMenu == 1) ? "square.grid.2x2.fill" : "square.grid.2x2")
-                    }.tag(1)
+                        Label("Browse", systemImage: (selectedMenu == 0) ? "square.grid.2x2.fill" : "square.grid.2x2")
+                    }.tag(0)
                 SearchView()
                     .tabItem {
                         Label("Search", systemImage: "magnifyingglass")
