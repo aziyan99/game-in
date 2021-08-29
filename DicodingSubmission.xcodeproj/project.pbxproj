@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0852A6D526DB54F100144813 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852A6D426DB54F100144813 /* GameModel.swift */; };
-		0852A6D826DB555300144813 /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852A6D726DB555300144813 /* GameService.swift */; };
 		0852A6DC26DB611100144813 /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852A6DB26DB611100144813 /* GenreView.swift */; };
 		0852A6DE26DB612400144813 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852A6DD26DB612400144813 /* SearchView.swift */; };
+		0852A6E026DB626900144813 /* BrowseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852A6DF26DB626900144813 /* BrowseViewModel.swift */; };
 		089F075A26D7423400C06EFD /* DicodingSubmissionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089F075926D7423400C06EFD /* DicodingSubmissionApp.swift */; };
 		089F075C26D7423400C06EFD /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089F075B26D7423400C06EFD /* AboutView.swift */; };
 		089F075E26D7423600C06EFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 089F075D26D7423600C06EFD /* Assets.xcassets */; };
@@ -22,9 +22,9 @@
 
 /* Begin PBXFileReference section */
 		0852A6D426DB54F100144813 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
-		0852A6D726DB555300144813 /* GameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameService.swift; sourceTree = "<group>"; };
 		0852A6DB26DB611100144813 /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
 		0852A6DD26DB612400144813 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		0852A6DF26DB626900144813 /* BrowseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewModel.swift; sourceTree = "<group>"; };
 		089F075626D7423400C06EFD /* DicodingSubmission.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DicodingSubmission.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		089F075926D7423400C06EFD /* DicodingSubmissionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicodingSubmissionApp.swift; sourceTree = "<group>"; };
 		089F075B26D7423400C06EFD /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -47,14 +47,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0852A6D626DB554800144813 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				0852A6D726DB555300144813 /* GameService.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
 		089F074D26D7423400C06EFD = {
 			isa = PBXGroup;
 			children = (
@@ -74,7 +66,6 @@
 		089F075826D7423400C06EFD /* DicodingSubmission */ = {
 			isa = PBXGroup;
 			children = (
-				0852A6D626DB554800144813 /* Services */,
 				089F077226D77F0900C06EFD /* Extensions */,
 				089F076F26D77B5B00C06EFD /* Helpers */,
 				089F076826D7469700C06EFD /* Model */,
@@ -118,6 +109,7 @@
 		089F076A26D746C800C06EFD /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				0852A6DF26DB626900144813 /* BrowseViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -208,9 +200,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				089F075C26D7423400C06EFD /* AboutView.swift in Sources */,
+				0852A6E026DB626900144813 /* BrowseViewModel.swift in Sources */,
 				0852A6DE26DB612400144813 /* SearchView.swift in Sources */,
 				089F075A26D7423400C06EFD /* DicodingSubmissionApp.swift in Sources */,
-				0852A6D826DB555300144813 /* GameService.swift in Sources */,
 				089F077126D77B6E00C06EFD /* RemoteImage+Helper.swift in Sources */,
 				08AA289226D7EEB100840BD1 /* BrowseView.swift in Sources */,
 				08AA289826D8D2B600840BD1 /* Credentials+Helper.swift in Sources */,
