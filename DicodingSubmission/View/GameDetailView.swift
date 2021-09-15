@@ -6,37 +6,61 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct GameDetailView: View {
+    
+    let id: Int
+    @ObservedObject var viewModel: GameDetailViewModel
+    @Environment(\.openURL) var openURL
+
+    
+    init(id: Int) {
+        self.id = id
+        viewModel = GameDetailViewModel(id: self.id)
+    }
+    
     var body: some View {
         GeometryReader { geometry in
-            ScrollView {
+            ScrollView (.vertical, showsIndicators: false) {
                 VStack (alignment: .leading) {
-                    Image("sample")
+                    WebImage(url: URL(string: viewModel.background_image))
                         .resizable()
+                        .placeholder {
+                            RoundedRectangle(cornerRadius: 10.0).foregroundColor(Color(UIColor.lightGray))
+                        }
+                        .indicator(.activity)
                         .aspectRatio(contentMode: .fill)
                         .frame(width: geometry.size.width, height: 200)
                         .cornerRadius(10.0)
+                    
                     HStack (alignment: .center) {
-                        Image("ezzy-pixel")
+                        WebImage(url: URL(string: viewModel.developer_image_background))
                             .resizable()
+                            .placeholder {
+                                RoundedRectangle(cornerRadius: 10.0).foregroundColor(Color(UIColor.lightGray))
+                            }
+                            .indicator(.activity)
                             .frame(width: 40, height: 40)
-                        Text("Rockstar.inc")
+                            .cornerRadius(10.0)
+                        Text(viewModel.developer_name)
                             .font(.body)
                     }
                     .padding([.bottom], 20)
-                    Text("Grand Theft Auto: V")
+                    
+                    Text(viewModel.name)
                         .font(.title2)
                         .padding([.bottom], 20)
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lacinia id tempor, faucibus nullam. Congue porta justo vitae suspendisse fusce egestas et scelerisque amet. Mattis mattis et enim faucibus rhoncus. In fusce pulvinar consequat dictum egestas purus hendrerit sollicitudin ut. Ut ultrices phasellus mauris amet. Est cras viverra egestas cursus penatibus massa sed. Pellentesque et ullamcorper gravida molestie in lobortis. Commodo orci, mauris cras ultricies interdum vitae id. Quam augue mauris sit in sed quam. Justo semper et, neque, adipiscing scelerisque cursus ut nulla. Vitae odio cursus vestibulum pellentesque volutpat elementum. Lorem suspendisse ornare hendrerit vivamus viverra ullamcorper at. Mi phasellus sit est viverra congue pellentesque sapien")
+                    Text(viewModel.description_raw)
                         .fixedSize(horizontal: false, vertical: true)
                         .font(.body)
                         .padding([.bottom], 30)
+                    
                     VStack (alignment: .center) {
                         Button(action: {
-                            
+                            openURL(URL(string: viewModel.website)!)
                         }, label: {
-                            Text("GTA 5 Website")
+                            Text("\(viewModel.name) Website")
                                 .foregroundColor(.white)
                                 .frame(width: geometry.size.width, height: 35)
                             
@@ -45,28 +69,18 @@ struct GameDetailView: View {
                         .cornerRadius(10.0)
                         Spacer()
                         Button(action: {
-                            
+                            openURL(URL(string: viewModel.redditUrl)!)
                         }, label: {
-                            Text("GTA 5 Reddit")
+                            Text("\(viewModel.name) Reddit")
                                 .foregroundColor(.white)
                                 .frame(width: geometry.size.width, height: 35)
                         })
                         .background(Color.black)
                         .cornerRadius(10.0)
                         Spacer()
-                        Button(action: {
-                            
-                        }, label: {
-                            Text("GTA 5 Metacritic")
-                                .foregroundColor(.white)
-                                .frame(width: geometry.size.width, height: 35)
-                        })
-                        .background(Color.black)
-                        .cornerRadius(10.0)
                         Spacer()
-                    }.frame(width: geometry.size.width)
+                    }
                 }
-                .frame(width: geometry.size.width)
             }
         }
         .padding([.leading, .trailing])
@@ -75,6 +89,6 @@ struct GameDetailView: View {
 
 struct GameDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        GameDetailView()
+        GameDetailView(id: 1)
     }
 }

@@ -1,18 +1,25 @@
 //
-//  GameViewModel.swift
+//  GameDetailViewModel.swift
 //  DicodingSubmission
 //
-//  Created by Raja Azian on 04/09/21.
+//  Created by Raja Azian on 15/09/21.
 //
 
 import Foundation
+
 import Network
 
-class GameViewModel: ObservableObject {
-    private let url = "https://api.rawg.io/api/games?key=2ddaf6bc17734aa4b0e1fea5ccad3163"
+class GameDetailViewModel: ObservableObject {
     
-    @Published var games = [Game]()
-    @Published var currentDate: String
+    var id: Int
+    
+    @Published var name: String = "-"
+    @Published var description_raw: String = "-"
+    @Published var background_image: String = "-"
+    @Published var developer_name: String = "-"
+    @Published var developer_image_background: String = "-"
+    @Published var website: String = "-"
+    @Published var redditUrl: String = "-"
     
     @Published var loading: Bool = false
     @Published var loaded: Bool = false
@@ -20,10 +27,8 @@ class GameViewModel: ObservableObject {
     
     let monitor = NWPathMonitor()
     
-    init() {
-        
-        self.currentDate = getCurrentDate()
-        
+    init(id: Int) {
+        self.id = id
         monitor.pathUpdateHandler = { path in
             if path.status == .satisfied {
                 self.fetchGames()
@@ -41,6 +46,7 @@ class GameViewModel: ObservableObject {
     }
     
     func fetchGames () {
+        let url = "https://api.rawg.io/api/games/\(self.id)?key=2ddaf6bc17734aa4b0e1fea5ccad3163"
         DispatchQueue.main.async {
             self.loaded = false
             self.noConnection = false
@@ -52,9 +58,16 @@ class GameViewModel: ObservableObject {
                 return
             }
             do {
-                let model = try JSONDecoder().decode(GameResult.self, from: data)
+                let model = try JSONDecoder().decode(GameDetail.self, from: data)
                 DispatchQueue.main.async {
-                    self.games = model.results
+                    self.name = model.name
+                    self.description_raw = model.description_raw
+                    self.background_image = model.background_image
+                    self.website = model.website
+                    self.redditUrl = model.reddit_url
+                    self.developer_name = model.developers[0].name
+                    self.developer_image_background = model.developers[0].image_background
+                    
                     self.loaded = true
                     self.noConnection = false
                     self.loading = false
