@@ -51,7 +51,7 @@ struct GameDetailView: View {
                     Text(viewModel.name)
                         .font(.title2)
                         .padding([.bottom], 20)
-                    Text(viewModel.description_raw)
+                    ExpandableTextView(viewModel.description_raw, lineLimit: 5)
                         .fixedSize(horizontal: false, vertical: true)
                         .font(.body)
                         .padding([.bottom], 30)
