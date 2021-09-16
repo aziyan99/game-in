@@ -12,7 +12,6 @@ struct GameDetailView: View {
     
     let id: Int
     @ObservedObject var viewModel: GameDetailViewModel
-    @Environment(\.openURL) var openURL
     @State var isShareSheetShowing: Bool = false
     
     
