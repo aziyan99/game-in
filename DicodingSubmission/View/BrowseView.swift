@@ -11,6 +11,7 @@ import SDWebImageSwiftUI
 struct BrowseView: View {
     
     @ObservedObject var viewModel = GameViewModel()
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         NavigationView {
@@ -64,7 +65,7 @@ struct BrowseView: View {
                                             .foregroundColor(.white)
                                             .frame(width: 90, height: 35)
                                     })
-                                    .background(Color.black)
+                                    .background(colorScheme == .dark ? Color(UIColor.systemGray4) : Color.black)
                                     .cornerRadius(10.0)
                             }
                             .frame(width: geometry.size.width, alignment: .leading)

@@ -10,6 +10,7 @@ import SwiftUI
 struct AboutView: View {
     
     @Environment(\.openURL) var openURL
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         VStack{
@@ -34,7 +35,7 @@ struct AboutView: View {
                 .foregroundColor(.white)
                 .frame(width: 300, height: 35)
             })
-            .background(Color.black)
+            .background(colorScheme == .dark ? Color(UIColor.systemGray4) : Color.black)
             .cornerRadius(10.0)
             
         }.padding()
