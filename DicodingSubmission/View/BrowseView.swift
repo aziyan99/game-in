@@ -21,7 +21,10 @@ struct BrowseView: View {
                 }
             }
             else if viewModel.noConnection {
-                Label("Lightning", systemImage: "bolt.fill")
+                Label("No internet connection", systemImage: "wifi.exclamationmark")
+            }
+            else if viewModel.somethingWrong {
+                Label("Failed to load data", systemImage: "xmark.octagon")
             }
             else {
                 GeometryReader { geometry in

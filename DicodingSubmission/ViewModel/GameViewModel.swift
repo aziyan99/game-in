@@ -17,6 +17,7 @@ class GameViewModel: ObservableObject {
     @Published var loading: Bool = false
     @Published var loaded: Bool = false
     @Published var noConnection: Bool = false
+    @Published var somethingWrong: Bool = false
     
     let monitor = NWPathMonitor()
     
@@ -31,6 +32,7 @@ class GameViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.loading = false
                     self.loaded = false
+                    self.somethingWrong = false
                     self.noConnection = true
                 }
             }
@@ -44,6 +46,7 @@ class GameViewModel: ObservableObject {
         DispatchQueue.main.async {
             self.loaded = false
             self.noConnection = false
+            self.somethingWrong = false
             self.loading = true
         }
         
@@ -57,12 +60,14 @@ class GameViewModel: ObservableObject {
                     self.games = model.results
                     self.loaded = true
                     self.noConnection = false
+                    self.somethingWrong = false
                     self.loading = false
                 }
             } catch {
                 self.loaded = false
                 self.noConnection = false
-                self.loading = true
+                self.loading = false
+                self.somethingWrong = true
             }
         }
         

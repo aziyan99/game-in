@@ -27,7 +27,10 @@ struct GameDetailView: View {
             }
         }
         else if viewModel.noConnection {
-            Label("Lightning", systemImage: "bolt.fill")
+            Label("No internet connection", systemImage: "wifi.exclamationmark")
+        }
+        else if viewModel.somethingWrong {
+            Label("Failed to load data", systemImage: "xmark.octagon")
         }
         else {
             GeometryReader { geometry in
@@ -77,8 +80,10 @@ struct GameDetailView: View {
                         Group {
                             Group {
                                 Text("Information")
+                                    .bold()
                                     .font(.title2)
                                     .padding([.bottom], 10)
+                
                                 Spacer()
                                 HStack {
                                     Text("Released")
