@@ -19,7 +19,10 @@ class GameDetailViewModel: ObservableObject {
     @Published var developer_name: String = "-"
     @Published var developer_image_background: String = "-"
     @Published var website: String = "-"
-    @Published var redditUrl: String = "-"
+    @Published var released: String = "-"
+    @Published var updated: String = "-"
+    @Published var minimumPcRequirement: String = "-"
+    @Published var recommendedPcRequirement: String = "-"
     
     @Published var loading: Bool = false
     @Published var loaded: Bool = false
@@ -45,6 +48,10 @@ class GameDetailViewModel: ObservableObject {
         monitor.start(queue: queue)
     }
     
+    public func shareGame(url: String) {
+        
+    }
+    
     func fetchGames () {
         let url = "https://api.rawg.io/api/games/\(self.id)?key=2ddaf6bc17734aa4b0e1fea5ccad3163"
         DispatchQueue.main.async {
@@ -64,7 +71,14 @@ class GameDetailViewModel: ObservableObject {
                     self.description_raw = model.description_raw
                     self.background_image = model.background_image
                     self.website = model.website
-                    self.redditUrl = model.reddit_url
+                    self.released = model.released
+                    self.updated = model.updated
+                    
+                    let minimumPcRequirement = model.platforms.filter { $0.platform?.name == "PC" }
+                    self.minimumPcRequirement = minimumPcRequirement[0].requirements?.minimum ?? "Not available in PC"
+                    self.recommendedPcRequirement = minimumPcRequirement[0].requirements?.recommended ?? "Not available in PC"
+                    
+                    
                     self.developer_name = model.developers[0].name
                     self.developer_image_background = model.developers[0].image_background
                     

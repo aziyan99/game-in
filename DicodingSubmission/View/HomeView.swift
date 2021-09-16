@@ -14,11 +14,11 @@ struct HomeView: View {
                 .tabItem {
                     Label("Browse", systemImage: "doc.plaintext")
                 }
-            SettingView()
+            AboutView()
                 .tabItem {
-                    Label("Setting", systemImage: "gearshape")
+                    Label("About me", systemImage: "person.circle")
                 }
-        }.accentColor(.black)
+        }
     }
 }
 

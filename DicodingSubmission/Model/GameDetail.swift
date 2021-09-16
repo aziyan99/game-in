@@ -11,7 +11,9 @@ struct GameDetail: Codable {
     let name: String
     let description_raw: String
     let background_image: String
-    let reddit_url: String
     let website: String
+    let updated: String
+    let released: String
     let developers: [Developer]
+    let platforms: [Platform]
 }

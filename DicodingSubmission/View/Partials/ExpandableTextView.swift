@@ -36,22 +36,19 @@ struct ExpandableTextView: View {
             Group {
                         Text(self.expanded ? text : shrinkText)
                         + Text(moreLessText)
-                        .bold()
                         .foregroundColor(.blue)
                 
             }.animation(.easeInOut)
             .lineLimit(expanded ? nil : lineLimit)
                 .background(
-                    // Render the limited text and measure its size
                     Text(text).lineLimit(lineLimit)
                         .background(GeometryReader { visibleTextGeometry in
                             Color.clear.onAppear() {
                                 let size = CGSize(width: visibleTextGeometry.size.width, height: .greatestFiniteMagnitude)
                                 let attributes:[NSAttributedString.Key:Any] = [NSAttributedString.Key.font: font]
-                                ///Binary search until mid == low && mid == high
                                 var low  = 0
                                 var heigh = shrinkText.count
-                                var mid = heigh ///start from top so that if text contain we does not need to loop
+                                var mid = heigh
                                 while ((heigh - low) > 1) {
                                     let attributedText = NSAttributedString(string: shrinkText + moreLessText, attributes: attributes)
                                     let boundingRect = attributedText.boundingRect(with: size, options: NSStringDrawingOptions.usesLineFragmentOrigin, context: nil)
@@ -71,18 +68,18 @@ struct ExpandableTextView: View {
                                     shrinkText = String(text.prefix(mid))
                                 }
                                 if truncated {
-                                    shrinkText = String(shrinkText.prefix(shrinkText.count - 2))  //-2 extra as highlighted text is bold
+                                    shrinkText = String(shrinkText.prefix(shrinkText.count - 2))
                                 }
                             }
                         })
-                        .hidden() // Hide the background
+                        .hidden()
             )
-            .font(Font(font)) ///set default font
+            .font(Font(font))
             if truncated {
                 Button(action: {
                     expanded.toggle()
                 }, label: {
-                    HStack { //taking tap on only last line, As it is not possible to get 'see more' location
+                    HStack {
                         Spacer()
                         Text("")
                     }.opacity(0)
