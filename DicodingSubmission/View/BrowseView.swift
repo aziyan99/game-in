@@ -23,7 +23,6 @@ struct BrowseView: View {
             else if viewModel.noConnection {
                 Label("Lightning", systemImage: "bolt.fill")
             }
-            
             else {
                 GeometryReader { geometry in
                     ScrollView(.vertical, showsIndicators: false) {
