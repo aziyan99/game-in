@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0852A6EA26DB6E0700144813 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0852A6E926DB6E0700144813 /* SDWebImageSwiftUI */; };
 		0852A6EE26DB746300144813 /* Float+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852A6ED26DB746300144813 /* Float+Extension.swift */; };
+		086534EB26F45B53000280E1 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 086534EA26F45B53000280E1 /* Launch Screen.storyboard */; };
 		086648A726E36079000F7BF4 /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086648A626E36079000F7BF4 /* BrowseView.swift */; };
 		086648AB26E360A6000F7BF4 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086648AA26E360A6000F7BF4 /* AboutView.swift */; };
 		086648B426E397F6000F7BF4 /* GameResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086648B326E397F6000F7BF4 /* GameResult.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		0852A6ED26DB746300144813 /* Float+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extension.swift"; sourceTree = "<group>"; };
+		086534EA26F45B53000280E1 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		086648A626E36079000F7BF4 /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
 		086648AA26E360A6000F7BF4 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		086648B326E397F6000F7BF4 /* GameResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResult.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				089F075926D7423400C06EFD /* DicodingSubmissionApp.swift */,
 				089F075D26D7423600C06EFD /* Assets.xcassets */,
 				089F076226D7423600C06EFD /* Info.plist */,
+				086534EA26F45B53000280E1 /* Launch Screen.storyboard */,
 				089F075F26D7423600C06EFD /* Preview Content */,
 			);
 			path = DicodingSubmission;
@@ -227,6 +230,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				086534EB26F45B53000280E1 /* Launch Screen.storyboard in Resources */,
 				089F076126D7423600C06EFD /* Preview Assets.xcassets in Resources */,
 				089F075E26D7423600C06EFD /* Assets.xcassets in Resources */,
 			);
