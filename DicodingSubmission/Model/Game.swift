@@ -12,4 +12,5 @@ struct Game: Identifiable, Codable {
     let name: String
     let rating: Float
     let background_image: String
+    let released: String
 }

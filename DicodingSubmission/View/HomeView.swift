@@ -14,6 +14,10 @@ struct HomeView: View {
                 .tabItem {
                     Label("Browse", systemImage: "doc.plaintext")
                 }
+            SearchView(searchText: "")
+                .tabItem {
+                    Label("Search", systemImage: "magnifyingglass")
+                }
             AboutView()
                 .tabItem {
                     Label("About me", systemImage: "person.circle")

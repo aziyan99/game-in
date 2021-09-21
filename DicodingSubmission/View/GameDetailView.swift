@@ -46,6 +46,7 @@ struct GameDetailView: View {
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: geometry.size.width, height: 200)
                                 .cornerRadius(10.0)
+                                .padding([.top], 10)
                             
                             HStack (alignment: .center) {
                                 WebImage(url: URL(string: viewModel.developer_image_background))
@@ -137,6 +138,7 @@ struct GameDetailView: View {
                 }
             }
             .padding([.leading, .trailing])
+            .navigationBarTitle(Text(viewModel.name), displayMode: .inline)
         }
     }
     
