@@ -9,33 +9,29 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct GameDetailView: View {
-    
-    let id: Int
+
+    let gameId: Int
     @ObservedObject var viewModel: GameDetailViewModel
     @State var isShareSheetShowing: Bool = false
-    
-    
-    init(id: Int) {
-        self.id = id
-        viewModel = GameDetailViewModel(id: self.id)
+
+    init(gameId: Int) {
+        self.gameId = gameId
+        viewModel = GameDetailViewModel(id: self.gameId)
     }
-    
+
     var body: some View {
         if viewModel.loading {
-            VStack (alignment: .center) {
+            VStack(alignment: .center) {
                 ProgressView()
             }
-        }
-        else if viewModel.noConnection {
+        } else if viewModel.noConnection {
             Label("No internet connection", systemImage: "wifi.exclamationmark")
-        }
-        else if viewModel.somethingWrong {
+        } else if viewModel.somethingWrong {
             Label("Failed to load data", systemImage: "xmark.octagon")
-        }
-        else {
+        } else {
             GeometryReader { geometry in
-                ScrollView (.vertical, showsIndicators: false) {
-                    VStack (alignment: .leading) {
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(alignment: .leading) {
                         Group {
                             WebImage(url: URL(string: viewModel.background_image))
                                 .resizable()
@@ -47,8 +43,8 @@ struct GameDetailView: View {
                                 .frame(width: geometry.size.width, height: 200)
                                 .cornerRadius(10.0)
                                 .padding([.top], 10)
-                            
-                            HStack (alignment: .center) {
+
+                            HStack(alignment: .center) {
                                 WebImage(url: URL(string: viewModel.developer_image_background))
                                     .resizable()
                                     .placeholder {
@@ -64,9 +60,9 @@ struct GameDetailView: View {
                                     Image(systemName: "square.and.arrow.up")
                                 }
                             }
-                            
+
                             .padding([.bottom], 20)
-                            
+
                             Text(viewModel.name)
                                 .font(.title2)
                                 .padding([.bottom], 20)
@@ -75,16 +71,16 @@ struct GameDetailView: View {
                                 .font(.body)
                                 .padding([.bottom], 30)
                         }
-                        
+
                         Divider()
-                        
+
                         Group {
                             Group {
                                 Text("Information")
                                     .bold()
                                     .font(.title2)
                                     .padding([.bottom], 10)
-                
+
                                 Spacer()
                                 HStack {
                                     Text("Released")
@@ -92,7 +88,7 @@ struct GameDetailView: View {
                                     Text(viewModel.released)
                                 }
                                 Divider()
-                                
+
                                 HStack {
                                     Text("Updated")
                                     Spacer()
@@ -108,7 +104,7 @@ struct GameDetailView: View {
                                         .fixedSize(horizontal: false, vertical: true)
                                 }
                                 Divider()
-                                
+
                                 VStack(alignment: .leading) {
                                     Text("Recommended PC Requirements")
                                         .padding([.bottom], 5)
@@ -121,11 +117,11 @@ struct GameDetailView: View {
                             }
                             Group {
                                 HStack {
-                                    Link(destination: URL(string: viewModel.website)!, label: {
+                                    Link(destination: URL(string: viewModel.website) ?? URL(string: "https://rawg.io")!, label: {
                                         Text("Website")
                                     })
                                     Spacer()
-                                    Link(destination: URL(string: viewModel.website)!, label: {
+                                    Link(destination: URL(string: viewModel.website) ?? URL(string: "https://rawg.io")!, label: {
                                         Image(systemName: "safari")
                                     })
                                 }
@@ -141,7 +137,7 @@ struct GameDetailView: View {
             .navigationBarTitle(Text(viewModel.name), displayMode: .inline)
         }
     }
-    
+
     func shareButton() {
         let url = URL(string: viewModel.website)
         let av = UIActivityViewController(activityItems: [url!], applicationActivities: nil)
@@ -149,8 +145,3 @@ struct GameDetailView: View {
     }
 }
 
-struct GameDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        GameDetailView(id: 1)
-    }
-}

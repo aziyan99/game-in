@@ -10,9 +10,9 @@ import Foundation
 import Network
 
 class GameDetailViewModel: ObservableObject {
-    
+
     var id: Int
-    
+
     @Published var name: String = "-"
     @Published var description_raw: String = "-"
     @Published var background_image: String = "-"
@@ -23,14 +23,14 @@ class GameDetailViewModel: ObservableObject {
     @Published var updated: String = "-"
     @Published var minimumPcRequirement: String = "-"
     @Published var recommendedPcRequirement: String = "-"
-    
+
     @Published var loading: Bool = false
     @Published var loaded: Bool = false
     @Published var noConnection: Bool = false
     @Published var somethingWrong: Bool = false
-    
+
     let monitor = NWPathMonitor()
-    
+
     init(id: Int) {
         self.id = id
         monitor.pathUpdateHandler = { path in
@@ -45,15 +45,15 @@ class GameDetailViewModel: ObservableObject {
                 }
             }
         }
-        
+
         let queue = DispatchQueue(label: "Monitor")
         monitor.start(queue: queue)
     }
-    
+
     public func shareGame(url: String) {
-        
+
     }
-    
+
     func fetchGames () {
         let url = "https://api.rawg.io/api/games/\(self.id)?key=2ddaf6bc17734aa4b0e1fea5ccad3163"
         DispatchQueue.main.async {
@@ -62,7 +62,7 @@ class GameDetailViewModel: ObservableObject {
             self.somethingWrong = false
             self.loading = true
         }
-        
+
         let task = URLSession.shared.dataTask(with: URL(string: url)!) { data, _, error in
             guard let data = data, error == nil else {
                 return
@@ -76,15 +76,18 @@ class GameDetailViewModel: ObservableObject {
                     self.website = model.website
                     self.released = model.released
                     self.updated = model.updated
-                    
+
                     let minimumPcRequirement = model.platforms.filter { $0.platform?.name == "PC" }
-                    self.minimumPcRequirement = minimumPcRequirement[0].requirements?.minimum ?? "Not available in PC"
-                    self.recommendedPcRequirement = minimumPcRequirement[0].requirements?.recommended ?? "Not available in PC"
-                    
-                    
+                    if minimumPcRequirement.count < 0 {
+                        self.minimumPcRequirement = "Not available in PC"
+                    } else {
+                        self.minimumPcRequirement = minimumPcRequirement[0].requirements?.minimum ?? "Not available in PC"
+                        self.recommendedPcRequirement = minimumPcRequirement[0].requirements?.recommended ?? "Not available in PC"
+                    }
+
                     self.developer_name = model.developers[0].name
                     self.developer_image_background = model.developers[0].image_background
-                    
+
                     self.loaded = true
                     self.noConnection = false
                     self.loading = false
@@ -97,7 +100,7 @@ class GameDetailViewModel: ObservableObject {
                 self.loading = true
             }
         }
-        
+
         task.resume()
     }
 }

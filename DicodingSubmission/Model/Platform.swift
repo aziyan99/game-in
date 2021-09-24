@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct Platform: Codable {
     var platform: PlatformDetail?
     var requirements: Requirement?

@@ -12,6 +12,6 @@ func getCurrentDate() -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "EEEE d MMMM"
     let currentDate: String = dateFormatter.string(from: date)
-    
+
     return currentDate
 }
