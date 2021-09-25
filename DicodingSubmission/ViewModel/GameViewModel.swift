@@ -10,21 +10,14 @@ import Network
 
 class GameViewModel: ObservableObject {
     private let url = "https://api.rawg.io/api/games?key=2ddaf6bc17734aa4b0e1fea5ccad3163"
-
     @Published var games = [Game]()
-    @Published var currentDate: String
-
     @Published var loading: Bool = false
     @Published var loaded: Bool = false
     @Published var noConnection: Bool = false
     @Published var somethingWrong: Bool = false
-
     let monitor = NWPathMonitor()
 
     init() {
-
-        self.currentDate = getCurrentDate()
-
         monitor.pathUpdateHandler = { path in
             if path.status == .satisfied {
                 self.fetchGames()

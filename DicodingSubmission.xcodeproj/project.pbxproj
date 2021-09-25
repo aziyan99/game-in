@@ -25,6 +25,8 @@
 		089F075A26D7423400C06EFD /* DicodingSubmissionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089F075926D7423400C06EFD /* DicodingSubmissionApp.swift */; };
 		089F075E26D7423600C06EFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 089F075D26D7423600C06EFD /* Assets.xcassets */; };
 		089F076126D7423600C06EFD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 089F076026D7423600C06EFD /* Preview Assets.xcassets */; };
+		08C077EF26FF0FA6004BEC40 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C077EE26FF0FA6004BEC40 /* UINavigationController+Extension.swift */; };
+		08C077F126FF0FC6004BEC40 /* UITabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C077F026FF0FC6004BEC40 /* UITabBarController+Extension.swift */; };
 		08EEF8B326F9639F00503DA3 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EEF8B226F9639F00503DA3 /* SearchView.swift */; };
 		08EEF8B526F968BB00503DA3 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EEF8B426F968BB00503DA3 /* SearchViewModel.swift */; };
 		08F7637026F2E3C8005B76EB /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F7636F26F2E3C8005B76EB /* Platform.swift */; };
@@ -52,6 +54,8 @@
 		089F075D26D7423600C06EFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		089F076026D7423600C06EFD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		089F076226D7423600C06EFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08C077EE26FF0FA6004BEC40 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
+		08C077F026FF0FC6004BEC40 /* UITabBarController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extension.swift"; sourceTree = "<group>"; };
 		08EEF8B226F9639F00503DA3 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		08EEF8B426F968BB00503DA3 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		08F7636F26F2E3C8005B76EB /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
@@ -161,6 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				0852A6ED26DB746300144813 /* Float+Extension.swift */,
+				08C077EE26FF0FA6004BEC40 /* UINavigationController+Extension.swift */,
+				08C077F026FF0FC6004BEC40 /* UITabBarController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -269,6 +275,8 @@
 				08EEF8B526F968BB00503DA3 /* SearchViewModel.swift in Sources */,
 				086648C426E3A628000F7BF4 /* GameDetailView.swift in Sources */,
 				0882F74426F99B72001A0A2D /* GameCellView.swift in Sources */,
+				08C077F126FF0FC6004BEC40 /* UITabBarController+Extension.swift in Sources */,
+				08C077EF26FF0FA6004BEC40 /* UINavigationController+Extension.swift in Sources */,
 				087ED72726F1AF2300EB3540 /* Developer.swift in Sources */,
 				086648B626E3981A000F7BF4 /* Game.swift in Sources */,
 				087ED72D26F1BDE200EB3540 /* ExpandableTextView.swift in Sources */,
