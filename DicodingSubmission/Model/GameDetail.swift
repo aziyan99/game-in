@@ -9,8 +9,8 @@ import Foundation
 
 struct GameDetail: Codable {
     let name: String
-    let description_raw: String
-    let background_image: String
+    let descriptionRaw: String
+    let backgroundImage: String
     let website: String
     let updated: String
     let released: String

@@ -9,5 +9,5 @@ import Foundation
 
 struct Developer: Codable {
     let name: String
-    let image_background: String
+    let imageBackground: String
 }

@@ -10,29 +10,25 @@ import Foundation
 import Network
 
 class GameDetailViewModel: ObservableObject {
-
-    var id: Int
-
+    var gameId: Int
     @Published var name: String = "-"
-    @Published var description_raw: String = "-"
-    @Published var background_image: String = "-"
-    @Published var developer_name: String = "-"
-    @Published var developer_image_background: String = "-"
+    @Published var descriptionRaw: String = "-"
+    @Published var backgroundImage: String = "-"
+    @Published var developerName: String = "-"
+    @Published var developerImageBackground: String = "-"
     @Published var website: String = "-"
     @Published var released: String = "-"
     @Published var updated: String = "-"
     @Published var minimumPcRequirement: String = "-"
     @Published var recommendedPcRequirement: String = "-"
-
     @Published var loading: Bool = false
     @Published var loaded: Bool = false
     @Published var noConnection: Bool = false
     @Published var somethingWrong: Bool = false
-
     let monitor = NWPathMonitor()
 
-    init(id: Int) {
-        self.id = id
+    init(gameId: Int) {
+        self.gameId = gameId
         monitor.pathUpdateHandler = { path in
             if path.status == .satisfied {
                 self.fetchGames()
@@ -50,49 +46,45 @@ class GameDetailViewModel: ObservableObject {
         monitor.start(queue: queue)
     }
 
-    public func shareGame(url: String) {
-
-    }
-
     func fetchGames () {
-        let url = "https://api.rawg.io/api/games/\(self.id)?key=2ddaf6bc17734aa4b0e1fea5ccad3163"
+        let url = formingUrl(gameId: self.gameId)
         DispatchQueue.main.async {
             self.loaded = false
             self.noConnection = false
             self.somethingWrong = false
             self.loading = true
         }
-
         let task = URLSession.shared.dataTask(with: URL(string: url)!) { data, _, error in
             guard let data = data, error == nil else {
                 return
             }
             do {
-                let model = try JSONDecoder().decode(GameDetail.self, from: data)
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let model = try decoder.decode(GameDetail.self, from: data)
                 DispatchQueue.main.async {
                     self.name = model.name
-                    self.description_raw = model.description_raw
-                    self.background_image = model.background_image
+                    self.descriptionRaw = model.descriptionRaw
+                    self.backgroundImage = model.backgroundImage
                     self.website = model.website
                     self.released = model.released
                     self.updated = model.updated
-
                     let minimumPcRequirement = model.platforms.filter { $0.platform?.name == "PC" }
                     if minimumPcRequirement.count < 1 {
                         self.minimumPcRequirement = "Not available in PC"
                     } else {
-                        self.minimumPcRequirement = minimumPcRequirement[0].requirements?.minimum ?? "Not available in PC"
-                        self.recommendedPcRequirement = minimumPcRequirement[0].requirements?.recommended ?? "Not available in PC"
+                        self.minimumPcRequirement = minimumPcRequirement[0]
+                            .requirements?.minimum ?? "Not available in PC"
+                        self.recommendedPcRequirement = minimumPcRequirement[0]
+                            .requirements?.recommended ?? "Not available in PC"
                     }
-
                     if model.developers.count < 1 {
-                        self.developer_name = "Not found"
-                        self.developer_image_background = "https://img.icons8.com/windows/32/000000/nothing-found.png"
+                        self.developerName = "Not found"
+                        self.developerImageBackground = "https://img.icons8.com/windows/32/000000/nothing-found.png"
                     } else {
-                        self.developer_name = model.developers[0].name
-                        self.developer_image_background = model.developers[0].image_background
+                        self.developerName = model.developers[0].name
+                        self.developerImageBackground = model.developers[0].imageBackground
                     }
-
                     self.loaded = true
                     self.noConnection = false
                     self.loading = false
@@ -107,5 +99,9 @@ class GameDetailViewModel: ObservableObject {
         }
 
         task.resume()
+    }
+
+    public func formingUrl(gameId: Int) -> String {
+        return "https://api.rawg.io/api/games/\(gameId)?key=2ddaf6bc17734aa4b0e1fea5ccad3163"
     }
 }

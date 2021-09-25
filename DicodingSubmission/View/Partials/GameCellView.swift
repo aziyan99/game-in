@@ -9,12 +9,13 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct GameCellView: View {
+
     let name: String
     let rating: Float
     let released: String
-    let id: Int
+    let gameId: Int
     let backgroundImage: String
-    
+
     var body: some View {
         HStack {
             WebImage(url: URL(string: backgroundImage))

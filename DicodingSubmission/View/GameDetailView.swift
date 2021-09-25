@@ -13,10 +13,11 @@ struct GameDetailView: View {
     let gameId: Int
     @ObservedObject var viewModel: GameDetailViewModel
     @State var isShareSheetShowing: Bool = false
+    let defaultUrl = URL(string: "https://rawg.io")
 
     init(gameId: Int) {
         self.gameId = gameId
-        viewModel = GameDetailViewModel(id: self.gameId)
+        viewModel = GameDetailViewModel(gameId: self.gameId)
     }
 
     var body: some View {
@@ -33,7 +34,7 @@ struct GameDetailView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading) {
                         Group {
-                            WebImage(url: URL(string: viewModel.background_image))
+                            WebImage(url: URL(string: viewModel.backgroundImage))
                                 .resizable()
                                 .placeholder {
                                     RoundedRectangle(cornerRadius: 10.0).foregroundColor(Color(UIColor.lightGray))
@@ -45,7 +46,7 @@ struct GameDetailView: View {
                                 .padding([.top], 10)
 
                             HStack(alignment: .center) {
-                                WebImage(url: URL(string: viewModel.developer_image_background))
+                                WebImage(url: URL(string: viewModel.developerImageBackground))
                                     .resizable()
                                     .placeholder {
                                         RoundedRectangle(cornerRadius: 10.0).foregroundColor(Color(UIColor.lightGray))
@@ -53,7 +54,7 @@ struct GameDetailView: View {
                                     .indicator(.activity)
                                     .frame(width: 50, height: 50)
                                     .cornerRadius(10.0)
-                                Text(viewModel.developer_name)
+                                Text(viewModel.developerName)
                                     .font(.body)
                                 Spacer()
                                 Button(action: shareButton) {
@@ -66,7 +67,7 @@ struct GameDetailView: View {
                             Text(viewModel.name)
                                 .font(.title2)
                                 .padding([.bottom], 20)
-                            ExpandableTextView(viewModel.description_raw, lineLimit: 5)
+                            ExpandableTextView(viewModel.descriptionRaw, lineLimit: 5)
                                 .fixedSize(horizontal: false, vertical: true)
                                 .font(.body)
                                 .padding([.bottom], 30)
@@ -117,11 +118,11 @@ struct GameDetailView: View {
                             }
                             Group {
                                 HStack {
-                                    Link(destination: URL(string: viewModel.website) ?? URL(string: "https://rawg.io")!, label: {
+                                    Link(destination: URL(string: viewModel.website) ?? defaultUrl!, label: {
                                         Text("Website")
                                     })
                                     Spacer()
-                                    Link(destination: URL(string: viewModel.website) ?? URL(string: "https://rawg.io")!, label: {
+                                    Link(destination: URL(string: viewModel.website) ?? defaultUrl!, label: {
                                         Image(systemName: "safari")
                                     })
                                 }
@@ -139,9 +140,9 @@ struct GameDetailView: View {
     }
 
     func shareButton() {
+        var shareAction: UIActivityViewController
         let url = URL(string: viewModel.website)
-        let av = UIActivityViewController(activityItems: [url!], applicationActivities: nil)
-        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
+        shareAction = UIActivityViewController(activityItems: [url!], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(shareAction, animated: true, completion: nil)
     }
 }
-

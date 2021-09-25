@@ -9,18 +9,16 @@ import Foundation
 import Network
 
 class SearchViewModel: ObservableObject {
-
     @Published var games = [Game]()
-
     @Published var loading: Bool = false
     @Published var loaded: Bool = false
     @Published var somethingWrong: Bool = false
-
     let monitor = NWPathMonitor()
+    var searchText: String = ""
 
     func fetchGames (searchText: String) {
-        let url = "https://api.rawg.io/api/games?search=\(searchText.replacingOccurrences(of: " ", with: "%20"))&key=2ddaf6bc17734aa4b0e1fea5ccad3163"
-
+        self.searchText = searchText.replacingOccurrences(of: " ", with: "%20")
+        let url = formingUrl()
         DispatchQueue.main.async {
             self.loaded = false
             self.somethingWrong = false
@@ -32,7 +30,9 @@ class SearchViewModel: ObservableObject {
                 return
             }
             do {
-                let model = try JSONDecoder().decode(GameResult.self, from: data)
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let model = try decoder.decode(GameResult.self, from: data)
                 DispatchQueue.main.async {
                     self.games = model.results
                     self.somethingWrong = false
@@ -50,4 +50,9 @@ class SearchViewModel: ObservableObject {
 
         task.resume()
     }
+
+    public func formingUrl() -> String {
+        return "https://api.rawg.io/api/games?search=\(self.searchText)&key=2ddaf6bc17734aa4b0e1fea5ccad3163"
+    }
+
 }

@@ -55,7 +55,9 @@ class GameViewModel: ObservableObject {
                 return
             }
             do {
-                let model = try JSONDecoder().decode(GameResult.self, from: data)
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let model = try decoder.decode(GameResult.self, from: data)
                 DispatchQueue.main.async {
                     self.games = model.results
                     self.loaded = true

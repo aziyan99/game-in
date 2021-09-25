@@ -184,6 +184,7 @@
 			buildConfigurationList = 089F076526D7423600C06EFD /* Build configuration list for PBXNativeTarget "DicodingSubmission" */;
 			buildPhases = (
 				089F075226D7423400C06EFD /* Sources */,
+				08C077EB26FEF556004BEC40 /* ShellScript */,
 				089F075326D7423400C06EFD /* Frameworks */,
 				089F075426D7423400C06EFD /* Resources */,
 			);
@@ -246,6 +247,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		08C077EB26FEF556004BEC40 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint autocorrect && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		089F075226D7423400C06EFD /* Sources */ = {

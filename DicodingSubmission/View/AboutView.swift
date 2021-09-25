@@ -11,6 +11,11 @@ struct AboutView: View {
 
     @Environment(\.openURL) var openURL
     @Environment(\.colorScheme) var colorScheme
+    let summaryText = """
+                            Hello I am Raja Azian, I am one of many dicoding student\
+                            from Tanjungpinang. I really like coding stuff, and I have a\
+                            dream to help others with my coding skills.
+                            """
 
     var body: some View {
         VStack {
@@ -21,7 +26,7 @@ struct AboutView: View {
                 .frame(width: 300, height: 300)
                 .padding([.bottom], 20)
 
-            Text("Hello I am Raja Azian, I am one of many dicoding student from Tanjungpinang. I really like coding stuff, and I have a dream to help others with my coding skills.")
+            Text(summaryText)
                 .padding([.bottom], 20)
 
             Button(action: {
@@ -31,12 +36,12 @@ struct AboutView: View {
                     title: { Text("Visit my Github") },
                     icon: { Image(systemName: "link") }
                 )
-                .font(.body)
-                .foregroundColor(.white)
-                .frame(width: 300, height: 35)
+                    .font(.body)
+                    .foregroundColor(.white)
+                    .frame(width: 300, height: 35)
             })
-            .background(colorScheme == .dark ? Color(UIColor.systemGray4) : Color.black)
-            .cornerRadius(10.0)
+                .background(colorScheme == .dark ? Color(UIColor.systemGray4) : Color.black)
+                .cornerRadius(10.0)
 
         }.padding()
     }

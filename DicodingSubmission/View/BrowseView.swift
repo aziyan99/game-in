@@ -9,10 +9,10 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct BrowseView: View {
-    
+
     @ObservedObject var viewModel = GameViewModel()
     @Environment(\.colorScheme) var colorScheme
-    
+
     var body: some View {
         NavigationView {
             if viewModel.loading {
@@ -25,15 +25,15 @@ struct BrowseView: View {
                 Label("Failed to load data", systemImage: "xmark.octagon")
             } else {
                 List {
-                    ForEach (viewModel.games) { game in
+                    ForEach(viewModel.games) { game in
                         NavigationLink(destination: GameDetailView(gameId: game.id)) {
                             GameCellView(name: game.name,
                                          rating: game.rating,
                                          released: game.released,
-                                         id: game.id,
-                                         backgroundImage: game.background_image)
+                                         gameId: game.id,
+                                         backgroundImage: game.backgroundImage)
                         }
-                        
+
                     }
                 }
                 .listStyle(PlainListStyle())
@@ -42,4 +42,3 @@ struct BrowseView: View {
         }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
-

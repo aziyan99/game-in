@@ -11,7 +11,7 @@ struct SearchView: View {
     @ObservedObject var viewModel = SearchViewModel()
     @State var text: String
     @State private var isEditing = false
-    
+
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -30,15 +30,15 @@ struct SearchView: View {
                                         .foregroundColor(.gray)
                                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                         .padding(.leading, 8)
-                                    
+
                                     if isEditing {
                                         Button(action: {
                                             self.text = ""
-                                        }) {
+                                        }, label: {
                                             Image(systemName: "multiply.circle.fill")
                                                 .foregroundColor(.gray)
                                                 .padding(.trailing, 8)
-                                        }
+                                        })
                                     }
                                 }
                             )
@@ -46,24 +46,24 @@ struct SearchView: View {
                             .onTapGesture {
                                 self.isEditing = true
                             }
-                        
+
                         if isEditing {
                             Button(action: {
                                 self.isEditing = false
                                 self.text = ""
                                 self.viewModel.games = [Game]()
-                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                                
-                            }) {
-                                Text("Cancel")
-                            }
-                            .padding(.trailing, 10)
-                            .transition(.move(edge: .trailing))
-                            .animation(.default)
+                                UIApplication.shared
+                                .sendAction(#selector(UIResponder.resignFirstResponder), to: nil,
+                                            from: nil,
+                                            for: nil)}, label: {
+                                    Text("Cancel")
+                                })
+                                .padding(.trailing, 10)
+                                .transition(.move(edge: .trailing))
+                                .animation(.default)
                         }
                     }
-                    
-                    
+
                     if viewModel.loading {
                         ProgressView()
                             .frame(width: geometry.size.width, height: geometry.size.height)
@@ -72,15 +72,15 @@ struct SearchView: View {
                             .frame(width: geometry.size.width, height: geometry.size.height)
                     } else if viewModel.loaded {
                         List {
-                            ForEach (viewModel.games) { game in
+                            ForEach(viewModel.games) { game in
                                 NavigationLink(destination: GameDetailView(gameId: game.id)) {
                                     GameCellView(name: game.name,
                                                  rating: game.rating,
                                                  released: game.released,
-                                                 id: game.id,
-                                                 backgroundImage: game.background_image)
+                                                 gameId: game.id,
+                                                 backgroundImage: game.backgroundImage)
                                 }
-                                
+
                             }
                         }
                         .listStyle(PlainListStyle())

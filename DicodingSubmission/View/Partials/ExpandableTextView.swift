@@ -43,14 +43,19 @@ struct ExpandableTextView: View {
                     Text(text).lineLimit(lineLimit)
                         .background(GeometryReader { visibleTextGeometry in
                             Color.clear.onAppear {
-                                let size = CGSize(width: visibleTextGeometry.size.width, height: .greatestFiniteMagnitude)
+                                let size = CGSize(width: visibleTextGeometry.size.width,
+                                                  height: .greatestFiniteMagnitude)
                                 let attributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: font]
                                 var low  = 0
                                 var heigh = shrinkText.count
                                 var mid = heigh
                                 while (heigh - low) > 1 {
-                                    let attributedText = NSAttributedString(string: shrinkText + moreLessText, attributes: attributes)
-                                    let boundingRect = attributedText.boundingRect(with: size, options: NSStringDrawingOptions.usesLineFragmentOrigin, context: nil)
+                                    let attributedText = NSAttributedString(string: shrinkText + moreLessText,
+                                                                            attributes: attributes)
+                                    let boundingRect = attributedText
+                                        .boundingRect(with: size,
+                                                      options: NSStringDrawingOptions.usesLineFragmentOrigin,
+                                                      context: nil)
                                     if boundingRect.size.height > visibleTextGeometry.size.height {
                                         truncated = true
                                         heigh = mid
