@@ -14,7 +14,7 @@ struct HomeView: View {
                 .tabItem {
                     Label("Browse", systemImage: "doc.plaintext")
                 }
-            SearchView(searchText: "")
+            SearchView(text: "")
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }

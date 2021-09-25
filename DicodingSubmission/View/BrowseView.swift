@@ -15,7 +15,6 @@ struct BrowseView: View {
     
     var body: some View {
         NavigationView {
-            
             if viewModel.loading {
                 VStack(alignment: .center) {
                     ProgressView()
@@ -25,19 +24,22 @@ struct BrowseView: View {
             } else if viewModel.somethingWrong {
                 Label("Failed to load data", systemImage: "xmark.octagon")
             } else {
-                List(viewModel.games, id: \.id) { game in
-                    NavigationLink(destination: GameDetailView(gameId: game.id)) {
-                        GameCellView(name: game.name,
-                                     rating: game.rating,
-                                     released: game.released,
-                                     id: game.id,
-                                     backgroundImage: game.background_image)
+                List {
+                    ForEach (viewModel.games) { game in
+                        NavigationLink(destination: GameDetailView(gameId: game.id)) {
+                            GameCellView(name: game.name,
+                                         rating: game.rating,
+                                         released: game.released,
+                                         id: game.id,
+                                         backgroundImage: game.background_image)
+                        }
+                        
                     }
                 }
                 .listStyle(PlainListStyle())
-                .navigationBarHidden(true)
+                .navigationTitle("Browse")
             }
-        }
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

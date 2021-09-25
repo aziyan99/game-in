@@ -78,15 +78,20 @@ class GameDetailViewModel: ObservableObject {
                     self.updated = model.updated
 
                     let minimumPcRequirement = model.platforms.filter { $0.platform?.name == "PC" }
-                    if minimumPcRequirement.count < 0 {
+                    if minimumPcRequirement.count < 1 {
                         self.minimumPcRequirement = "Not available in PC"
                     } else {
                         self.minimumPcRequirement = minimumPcRequirement[0].requirements?.minimum ?? "Not available in PC"
                         self.recommendedPcRequirement = minimumPcRequirement[0].requirements?.recommended ?? "Not available in PC"
                     }
 
-                    self.developer_name = model.developers[0].name
-                    self.developer_image_background = model.developers[0].image_background
+                    if model.developers.count < 1 {
+                        self.developer_name = "Not found"
+                        self.developer_image_background = "https://img.icons8.com/windows/32/000000/nothing-found.png"
+                    } else {
+                        self.developer_name = model.developers[0].name
+                        self.developer_image_background = model.developers[0].image_background
+                    }
 
                     self.loaded = true
                     self.noConnection = false
