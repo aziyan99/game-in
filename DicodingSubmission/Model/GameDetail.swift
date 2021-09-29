@@ -5,8 +5,6 @@
 //  Created by Raja Azian on 15/09/21.
 //
 
-import Foundation
-
 struct GameDetail: Codable {
     let name: String
     let descriptionRaw: String

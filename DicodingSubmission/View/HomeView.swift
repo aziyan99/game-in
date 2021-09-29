@@ -18,6 +18,10 @@ struct HomeView: View {
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }
+            FavoritedView()
+                .tabItem {
+                    Label("Favorite", systemImage: "heart")
+                }
             AboutView()
                 .tabItem {
                     Label("About me", systemImage: "person.circle")
