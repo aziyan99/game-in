@@ -14,6 +14,7 @@ struct GameDetailView: View {
     @ObservedObject var viewModel: GameDetailViewModel
     @State var isShareSheetShowing: Bool = false
     let defaultUrl = URL(string: "https://rawg.io")
+    @State var favoritedImage = "heart"
 
     init(gameId: Int) {
         self.gameId = gameId
@@ -57,11 +58,19 @@ struct GameDetailView: View {
                                 Text(viewModel.developerName)
                                     .font(.body)
                                 Spacer()
+                                Button(action: {
+                                    if self.favoritedImage == "heart" {
+                                        self.favoritedImage = "heart.fill"
+                                    } else {
+                                        self.favoritedImage = "heart"
+                                    }
+                                }, label: {
+                                    Image(systemName: "\(self.favoritedImage)")
+                                })
                                 Button(action: shareButton) {
                                     Image(systemName: "square.and.arrow.up")
                                 }
                             }
-
                             .padding([.bottom], 20)
 
                             Text(viewModel.name)
