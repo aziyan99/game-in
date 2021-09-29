@@ -66,9 +66,13 @@ struct GameDetailView: View {
                                     }
                                 }, label: {
                                     Image(systemName: "\(self.favoritedImage)")
-                                })
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                }).padding([.trailing], 10)
                                 Button(action: shareButton) {
                                     Image(systemName: "square.and.arrow.up")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
                                 }
                             }
                             .padding([.bottom], 20)
