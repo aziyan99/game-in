@@ -16,11 +16,9 @@ struct GameDetailView: View {
     let defaultUrl = URL(string: "https://rawg.io")
     @State var favoritedImage = "heart"
     @StateObject private var favoriteGameViewModel = FavoriteGameViewModel()
-    let isFavorited: Bool
 
-    init(gameId: Int, isFavorited: Bool) {
+    init(gameId: Int) {
         self.gameId = gameId
-        self.isFavorited = isFavorited
         viewModel = GameDetailViewModel(gameId: self.gameId)
     }
 
@@ -151,18 +149,6 @@ struct GameDetailView: View {
                                 .foregroundColor(.blue)
                                 Divider()
                             }
-                        }
-
-                        if isFavorited {
-//                            Group {
-//                                Button(action: {
-//                                    print("Delete")
-//                                }, label: {
-//                                    Label("Delete from favorite", systemImage: "trash")
-//                                })
-//                            }
-//                            .padding([.top], 20)
-//                            .padding([.bottom], 20)
                         }
                     }
                     .padding([.bottom], 20)

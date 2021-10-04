@@ -41,9 +41,9 @@ class CoreDataManager {
         }
     }
 
-    func getGameById(id: NSManagedObjectID) -> Favorite? {
+    func getGameById(objectId: NSManagedObjectID) -> Favorite? {
         do {
-            return try viewContext.existingObject(with: id) as? Favorite
+            return try viewContext.existingObject(with: objectId) as? Favorite
         } catch {
             return nil
         }
@@ -52,5 +52,22 @@ class CoreDataManager {
     func deleteGame(game: Favorite) {
         viewContext.delete(game)
         save()
+    }
+
+    func getGameByGameId(gameId: Int64) -> Bool {
+        let request: NSFetchRequest<Favorite> = Favorite.fetchRequest()
+        request.predicate = NSPredicate(
+            format: "gameId = %@", "\(gameId)"
+        )
+        do {
+            let result = try viewContext.fetch(request)
+            if result.count > 0 {
+                return true
+            } else {
+                return false
+            }
+        } catch {
+            return false
+        }
     }
 }

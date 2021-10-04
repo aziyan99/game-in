@@ -14,7 +14,7 @@ struct FavoritedView: View {
         NavigationView {
                 List {
                     ForEach(viewModel.games, id: \.gameId) { game in
-                        NavigationLink(destination: GameDetailView(gameId: Int(game.gameId), isFavorited: true)) {
+                        NavigationLink(destination: GameDetailView(gameId: Int(game.gameId))) {
                             GameCellView(name: game.name,
                                          rating: game.rating,
                                          released: game.releasedDate,
@@ -24,11 +24,12 @@ struct FavoritedView: View {
 
                     }
                     .onDelete(perform: deleteFavoriteGame)
-                    .onAppear(perform: viewModel.getAllGames)
                 }
                 .listStyle(PlainListStyle())
                 .navigationTitle("Favorited Games")
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear(perform: viewModel.getAllGames)
     }
 
     func deleteFavoriteGame(at offsets: IndexSet) {

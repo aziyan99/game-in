@@ -5,6 +5,7 @@
 //  Created by Raja Azian on 15/09/21.
 //
 
+import Foundation
 import Network
 
 class GameDetailViewModel: ObservableObject {
@@ -48,10 +49,7 @@ class GameDetailViewModel: ObservableObject {
     func fetchGames () {
         let url = formingUrl(gameId: self.gameId)
         DispatchQueue.main.async {
-            self.loaded = false
-            self.noConnection = false
-            self.somethingWrong = false
-            self.loading = true
+            self.isLoading()
         }
         let task = URLSession.shared.dataTask(with: URL(string: url)!) { data, _, error in
             guard let data = data, error == nil else {
@@ -85,16 +83,10 @@ class GameDetailViewModel: ObservableObject {
                         self.developerName = model.developers[0].name
                         self.developerImageBackground = model.developers[0].imageBackground
                     }
-                    self.loaded = true
-                    self.noConnection = false
-                    self.loading = false
-                    self.somethingWrong = false
+                    self.isloaded()
                 }
             } catch {
-                self.loaded = false
-                self.noConnection = false
-                self.somethingWrong = false
-                self.loading = true
+                self.isSomethingWrong()
             }
         }
 
@@ -103,5 +95,26 @@ class GameDetailViewModel: ObservableObject {
 
     public func formingUrl(gameId: Int) -> String {
         return "https://api.rawg.io/api/games/\(gameId)?key=2ddaf6bc17734aa4b0e1fea5ccad3163"
+    }
+
+    public func isLoading() {
+        self.loaded = false
+        self.noConnection = false
+        self.somethingWrong = false
+        self.loading = true
+    }
+
+    public func isloaded() {
+        self.loaded = true
+        self.noConnection = false
+        self.loading = false
+        self.somethingWrong = false
+    }
+
+    public func isSomethingWrong() {
+        self.loaded = false
+        self.noConnection = false
+        self.loading = false
+        self.somethingWrong = true
     }
 }

@@ -19,14 +19,15 @@ class FavoriteGameViewModel: ObservableObject {
     }
 
     func save(gameId: Int64, name: String, rating: Float, releasedDate: String, backgroundImage: String) {
-        let favorite = Favorite(context: CoreDataManager.shared.persisntentContainer.viewContext)
-        favorite.gameId = gameId
-        favorite.name = name
-        favorite.rating = rating
-        favorite.releasedDate = releasedDate
-        favorite.backgroundImage = backgroundImage
-
-        CoreDataManager.shared.save()
+        if !isGameExists(Int(gameId)) {
+            let favorite = Favorite(context: CoreDataManager.shared.persisntentContainer.viewContext)
+            favorite.gameId = gameId
+            favorite.name = name
+            favorite.rating = rating
+            favorite.releasedDate = releasedDate
+            favorite.backgroundImage = backgroundImage
+            CoreDataManager.shared.save()
+        }
     }
 
     func getAllGames() {
@@ -35,9 +36,19 @@ class FavoriteGameViewModel: ObservableObject {
     }
 
     func delete(_ game: FavoriteGame) {
-        let existingFavoritedGame = CoreDataManager.shared.getGameById(id: game.objectId)
+        let existingFavoritedGame = CoreDataManager.shared.getGameById(objectId: game.objectId)
         if let existingFavoritedGame = existingFavoritedGame {
             CoreDataManager.shared.deleteGame(game: existingFavoritedGame)
+            self.getAllGames()
+        }
+    }
+
+    func isGameExists(_ gameId: Int) -> Bool {
+        let existingFavoritedGame = CoreDataManager.shared.getGameByGameId(gameId: Int64(gameId))
+        if existingFavoritedGame {
+            return true
+        } else {
+            return false
         }
     }
 }

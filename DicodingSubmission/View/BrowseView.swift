@@ -28,7 +28,7 @@ struct BrowseView: View {
             } else {
                 List {
                     ForEach(viewModel.games) { game in
-                        NavigationLink(destination: GameDetailView(gameId: game.id, isFavorited: false)) {
+                        NavigationLink(destination: GameDetailView(gameId: game.id)) {
                             GameCellView(name: game.name,
                                          rating: game.rating,
                                          released: game.released,
