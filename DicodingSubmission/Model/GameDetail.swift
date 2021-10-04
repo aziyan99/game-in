@@ -10,6 +10,7 @@ struct GameDetail: Codable {
     let descriptionRaw: String
     let backgroundImage: String
     let website: String
+    let rating: Float
     let updated: String
     let released: String
     let developers: [Developer]

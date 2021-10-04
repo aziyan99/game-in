@@ -5,7 +5,6 @@
 //  Created by Raja Azian on 21/09/21.
 //
 
-import Foundation
 import Network
 
 class SearchViewModel: ObservableObject {

@@ -5,8 +5,6 @@
 //  Created by Raja Azian on 15/09/21.
 //
 
-import Foundation
-
 import Network
 
 class GameDetailViewModel: ObservableObject {
@@ -17,6 +15,7 @@ class GameDetailViewModel: ObservableObject {
     @Published var developerName: String = "-"
     @Published var developerImageBackground: String = "-"
     @Published var website: String = "-"
+    @Published var rating: Float = 1.1
     @Published var released: String = "-"
     @Published var updated: String = "-"
     @Published var minimumPcRequirement: String = "-"
@@ -69,6 +68,7 @@ class GameDetailViewModel: ObservableObject {
                     self.website = model.website
                     self.released = model.released
                     self.updated = model.updated
+                    self.rating = model.rating
                     let minimumPcRequirement = model.platforms.filter { $0.platform?.name == "PC" }
                     if minimumPcRequirement.count < 1 {
                         self.minimumPcRequirement = "Not available in PC"

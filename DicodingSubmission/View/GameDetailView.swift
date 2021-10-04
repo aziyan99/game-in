@@ -15,9 +15,12 @@ struct GameDetailView: View {
     @State var isShareSheetShowing: Bool = false
     let defaultUrl = URL(string: "https://rawg.io")
     @State var favoritedImage = "heart"
+    @StateObject private var favoriteGameViewModel = FavoriteGameViewModel()
+    let isFavorited: Bool
 
-    init(gameId: Int) {
+    init(gameId: Int, isFavorited: Bool) {
         self.gameId = gameId
+        self.isFavorited = isFavorited
         viewModel = GameDetailViewModel(gameId: self.gameId)
     }
 
@@ -60,6 +63,12 @@ struct GameDetailView: View {
                                 Spacer()
                                 Button(action: {
                                     if self.favoritedImage == "heart" {
+                                        favoriteGameViewModel.save(gameId: Int64(viewModel.gameId),
+                                                                   name: viewModel.name,
+                                                                   rating: viewModel.rating,
+                                                                   releasedDate: viewModel.released,
+                                                                   backgroundImage: viewModel.backgroundImage)
+                                        favoriteGameViewModel.getAllGames()
                                         self.favoritedImage = "heart.fill"
                                     } else {
                                         self.favoritedImage = "heart"
@@ -142,6 +151,18 @@ struct GameDetailView: View {
                                 .foregroundColor(.blue)
                                 Divider()
                             }
+                        }
+
+                        if isFavorited {
+//                            Group {
+//                                Button(action: {
+//                                    print("Delete")
+//                                }, label: {
+//                                    Label("Delete from favorite", systemImage: "trash")
+//                                })
+//                            }
+//                            .padding([.top], 20)
+//                            .padding([.bottom], 20)
                         }
                     }
                     .padding([.bottom], 20)

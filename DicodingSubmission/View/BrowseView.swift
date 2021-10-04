@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
 struct BrowseView: View {
 
     @ObservedObject var viewModel = GameViewModel()
-    @Environment(\.colorScheme) var colorScheme
+
+    init() {
+        viewModel.fetchGames()
+    }
 
     var body: some View {
         NavigationView {
@@ -26,7 +28,7 @@ struct BrowseView: View {
             } else {
                 List {
                     ForEach(viewModel.games) { game in
-                        NavigationLink(destination: GameDetailView(gameId: game.id)) {
+                        NavigationLink(destination: GameDetailView(gameId: game.id, isFavorited: false)) {
                             GameCellView(name: game.name,
                                          rating: game.rating,
                                          released: game.released,

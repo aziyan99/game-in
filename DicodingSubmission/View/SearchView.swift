@@ -73,7 +73,7 @@ struct SearchView: View {
                     } else if viewModel.loaded {
                         List {
                             ForEach(viewModel.games) { game in
-                                NavigationLink(destination: GameDetailView(gameId: game.id)) {
+                                NavigationLink(destination: GameDetailView(gameId: game.id, isFavorited: false)) {
                                     GameCellView(name: game.name,
                                                  rating: game.rating,
                                                  released: game.released,
